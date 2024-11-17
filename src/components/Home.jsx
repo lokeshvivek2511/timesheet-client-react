@@ -5,19 +5,20 @@ import { addtimesheet } from '../api';
 import { notify } from "./toast";
 import { getmytimesheet } from '../api';
 import { Navigate } from 'react-router-dom';
+import confetti from 'canvas-confetti'
+import Login from './Login';
 
 
 function Home() {
   
 
-  const [createtimesheet, setCreatetimeshee] = useState(false)
-
+  const [createtimesheet, setCreatetimeshee] = useState(true)
   const { userEmail,setUserEmail } = useContext(UserContext);
 
 
   const [tasks, setTasks] = useState([
-    { startTime: '09:00', finishTime: '09:01', task: 'aaa', id: 1 },
-    { startTime: '09:01', finishTime: '09:03', task: 'bbb', id: 2 }
+    { startTime: '09:00', finishTime: '', task: '', id: 1 },
+    { startTime: '', finishTime: '', task: '', id:'' }
   ]);
 
   // const[finaldatatosend,setFinaldatatosend]=useState({})
@@ -157,29 +158,33 @@ function Home() {
 useEffect(() => {
   const fetchTimesheet = async () => {
     const response = await getmytimesheet({email: userEmail});
-      if(userEmail.length==0){
-        notify("you haven't logged in", "warning");
-        // <Navigate to="/login" replace />
-      }
+    var poda=poda || false;
     if (response.status) {
-      setPretimesheet([{
+      setPretimesheet(()=>[{
         date: response.data[0].date,
         status: response.data[0].status,
         remark: response.data[0].remark || '', // Add this line
         id: 1
       }]);
       setTasks(response.data[0].timesheet);
+      if(!createtimesheet && response.data[0].status=='approved'){
+        confetti({
+          particleCount:150,
+          spread:360
+        })
+      }
     }
   };
 
   fetchTimesheet();
-}, [viewtimesheet,createtimesheet]);
+}, [createtimesheet]);
 
 
 
   const handleViewTimesheet = (id) => {               //yet to code
     setViewtimesheet(!viewtimesheet)
   };
+
 
 
 
@@ -259,6 +264,13 @@ useEffect(() => {
             </div>
           </div>
         ))}
+
+        <div className="timesheettable-total">
+          <span className="timesheettable-total-label">Total Hours:</span>
+          <span className="timesheettable-total-hours">
+            {calculateTotalHours.toFixed(2)} hours <br />{calculateTotalHours<8 && <p >*atleast 8 hrs</p>}
+          </span>
+    </div>
         
         <button
           type="button"
@@ -268,7 +280,7 @@ useEffect(() => {
           Add Task
         </button>
 
-        <button type="submit" className="createtimesheet-submit-btn">
+        <button type="submit" className="createtimesheet-submit-btn" disabled={calculateTotalHours< 8}>
           Submit Timesheet
         </button>
       </form>
@@ -317,6 +329,7 @@ useEffect(() => {
     </>)
 
     const Timesheetstatus=(<>
+    
       {pretimesheet[0].status ? <div className="timesheet-container">
         <table className="timesheet-table">
           <thead>

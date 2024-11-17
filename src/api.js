@@ -1,5 +1,9 @@
+// const baseuri=`https://timesheet-node-loki.netlify.app/.netlify/functions/api`;
+const baseuri=`http://localhost:5000/api/`
+
+
 export const handleSignup = async (data) => {
-    const res = await fetch('http://localhost:5000/api/signup', {
+    const res = await fetch(`${baseuri}signup`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -11,7 +15,7 @@ export const handleSignup = async (data) => {
  };
 
 export const handleSignin = async (data) => {
-    const res = await fetch('http://localhost:5000/api/signin', {
+    const res = await fetch(`${baseuri}signin`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -24,7 +28,7 @@ export const handleSignin = async (data) => {
  };
 
 export const addtimesheet = async (data) => {
-    const res = await fetch('http://localhost:5000/api/addtimesheet', {
+    const res = await fetch(`${baseuri}addtimesheet`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -36,7 +40,7 @@ export const addtimesheet = async (data) => {
     return result.status;
  };
 export const getmytimesheet = async (data) => {
-    const res = await fetch('http://localhost:5000/api/getmytimesheet', {
+    const res = await fetch(`${baseuri}getmytimesheet`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -50,8 +54,9 @@ export const getmytimesheet = async (data) => {
  };
 
  export const handleadminlogin = async (data) => {
-    const res = await fetch('http://localhost:5000/api/adminlogin', {
+    const res = await fetch(`${baseuri}adminlogin`, {
         method: 'POST',
+        // credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -63,13 +68,13 @@ export const getmytimesheet = async (data) => {
  };
 
  export const getAllTimesheets = async () => {
-    const res = await fetch('http://localhost:5000/api/getAllTimesheets');
+    const res = await fetch(`${baseuri}getAllTimesheets`);
     const result = await res.json();
     return result;
 };
 
 export const updateTimesheetStatus = async (data) => {
-    const res = await fetch('http://localhost:5000/api/updateTimesheetStatus', {
+    const res = await fetch(`${baseuri}updateTimesheetStatus`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -4,10 +4,12 @@
   box-sizing: border-box;
 }
 :root {
-  --main-color: #4ad0cc;
+  --main-color: #1a73e8;
+  --primary-color: #1a73e8;
+  --primary-hover: #1557b0;
   --secondary-color: #d7e3ef;
   --box-shadow: 0 0 7px 0 var(--secondary-color);
-  --main-color-hover: #52b1ae;
+  --main-color-hover: #1557b0;
 }
 body {
   font-size: 14px;

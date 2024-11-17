@@ -1,82 +1,151 @@
-.home{
-    display: flex;
-    height: 100dvh;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-.side{
-    flex-grow: 2;
-    height: 100%;
-    max-width: 20%;
-    min-width: 15rem;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0px 0px 5px gray;
-    margin-right: 5px;
-}
-.userdetail p{
-    font-size: 1rem;
-    color: blue;
-    padding: 5px;
-}
-.timebtn{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    max-width: 100%;
-    
-}
-.timebtn .btn{
-    background:#5A4BFF;
-    border: none;
-    color: white;
-    padding: 1rem;
-    font-size: 1rem;
-    width: 25rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    margin-bottom: 1.5rem;
-    border-radius: 0.5rem;
-    max-width: 100%;
-
+.home {
+  display: flex;
+  height: 100vh;
+  /* justify-content: center; */
+  align-items: start;
+  width: 100%;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.timebtn .btn h1{
-  font:60px;
-  margin-left: 5px;  
+/* Sidebar Styling */
+.side {
+  flex-grow: 1;
+  max-width: 30%;
+  width: 20rem;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  justify-content: start;
+  background: linear-gradient(to bottom, #5A4BFF, #3A34E6);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  color: white;
+  transition: all 0.3s ease-in-out;
 }
 
-.timebtn .btn:hover{
-    background:hsl(245, 100%, 55%);
-    cursor: pointer;
 
+
+/* User Detail Styling */
+.userdetail {
+  text-align: center;
 }
 
+.userdetail p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  color: #e3eaff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Styling */
+.timebtn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.timebtn .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  color: #5A4BFF;
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timebtn .btn:hover {
+  background: hsl(245, 100%, 55%);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.timebtn .btn h1 {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
+
+/* Responsive Styling */
 @media screen and (max-width: 768px) {
-    .side{
-        min-width: 8rem;
-    }
-    .timebtn .btn {
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-  
-    .userdetail p {
-      padding: 15px;
-      margin: 10px;
-    }
+  .home{
+    display: flex ;
+    flex-direction: column;
+   align-items: center;
+
   }
+  .side {
+    flex-direction: row;
+    height: auto;
+    width: 100%;
+    min-width: 100vw;
+    max-height: fit-content;
+    padding: 1rem;
+    background: linear-gradient(to right, #5A4BFF, #3A34E6);
+    box-shadow: none;
+    border-radius: 0;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    font-size: smaller;
+
+    
+  }
+
+  .userdetail {
+    order: 1;
+    flex: 1;
+    text-align: left;
+  }
+
+  .timebtn {
+    order: 2;
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    justify-content: space-around;
+    gap: 0.5rem;
+  }
+
+  .timebtn .btn {
+    flex: 1 1 45%;
+    /* min-width: 100%; */
+    max-width: fit-content;
+    
+    font-size: 0.9rem;
+    padding: 0 0.4rem;
+  }
+
+  .userdetail p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .side{
+    font-size: smaller;
+    flex-direction: column;
+  }
+}
+
 
 /* status table............. */
 
 .timesheet-container {
   width: 100%;
+  max-width:80vw;
   padding: 20px;
-  margin: 20px auto;
+  margin: 0px auto;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
@@ -143,9 +212,11 @@
 }
 
 @media screen and (max-width: 768px) {
+
   .timesheet-container {
     padding: 10px;
     margin: 10px;
+    max-width: 100%;
   }
   
   .timesheet-table th,
@@ -177,12 +248,22 @@
 
 .createtimesheet-container {
   width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
+  max-width:80vw;
+  max-height: 100vh;
+  margin: 0 auto;
   padding: 25px;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  transition: all 0.5s ease-in-out;
+}
+.createtimesheet-container::-webkit-scrollbar{
+  width: 7px;
+}
+.createtimesheet-container::-webkit-scrollbar-thumb{
+  border-radius: 20px;
+  background-color: #504af6;
 }
 
 .createtimesheet-header {
@@ -406,6 +487,10 @@
   color: #1a73e8;
   font-weight: 600;
   font-size: 16px;
+}
+.timesheettable-total-hours p{
+  color: orangered;
+  font-size: 0.6rem;
 }
 
 @media screen and (max-width: 768px) {

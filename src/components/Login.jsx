@@ -26,7 +26,7 @@ const Login = () => {
   const [status, setStatus] = useState();
 
   useEffect(()=>{
-    setData({
+    setData({  
       email: "",
       password: "",
     })
