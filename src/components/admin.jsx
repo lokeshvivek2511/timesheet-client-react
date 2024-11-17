@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { getAllTimesheets, updateTimesheetStatus } from '../api';
 import { notify } from "./toast";
+import { AdminContext } from "../App";
+import {  Navigate } from "react-router-dom";
+
+
 
 function Admin() {
+  const { adminEmail,setAdminEmail } = useContext(AdminContext);
   const [timesheets, setTimesheets] = useState([]);
   const [selectedTimesheet, setSelectedTimesheet] = useState(null);
   const [remark, setRemark] = useState('');
@@ -61,10 +66,20 @@ function Admin() {
     return <div className="admin-loading">Loading...</div>;
   }
 
+  const handleLogout = () => {
+    setAdminEmail('');
+    notify("Logged out successfully", "success");
+  };
+
   return (
     <div className="admin-container">
+      {adminEmail.length==0 && <Navigate to="/adminlogin" replace />}
+      <div className="admin-header-container">
       <h2 className="admin-header">Timesheet Management</h2>
-      
+      <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
+        </div>
       <div className="admin-sections">
         <div className="admin-section">
           <h3>Pending Timesheets</h3>

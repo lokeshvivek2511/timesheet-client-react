@@ -8,14 +8,14 @@ import { notify } from "./toast";
 import { Link } from "react-router-dom";
 import { handleadminlogin } from "../api";
 import {  Navigate } from "react-router-dom";
-import { UserContext } from "../App";
+import { AdminContext } from "../App";
 
 
 // import axios from "axios";
 
 const Adminlogin = () => {
 
-  const { setUserEmail } = useContext(UserContext);
+  const { adminEmail , setAdminEmail } = useContext(AdminContext);
 
 
   const [data, setData] = useState({
@@ -40,7 +40,7 @@ const Adminlogin = () => {
     } else {
       setData({ ...data, [event.target.name]: event.target.value });
     }
-  };
+  };                                                                              
 
   const focusHandler = (event) => {
     setTouched({ ...touched, [event.target.name]: true });
@@ -51,7 +51,7 @@ const Adminlogin = () => {
     const responseStatus = await handleadminlogin(data);
     setStatus(responseStatus);
     if (responseStatus) {
-      setUserEmail(data.email);
+      setAdminEmail(data.email);
       // console.log(responseStatus);
       notify("You logged in successfully", "success");
     } else {
@@ -62,7 +62,7 @@ const Adminlogin = () => {
 
   return (
     <div className={styles.container}>
-      {status && <Navigate to="/admin" replace />}
+      {(status || adminEmail.length>0) && <Navigate to="/admin" replace />}
       <form className={styles.formLogin} onSubmit={submitHandler} autoComplete="off">
         <h2>Sign In</h2>
         <div>
