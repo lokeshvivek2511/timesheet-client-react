@@ -1,6 +1,5 @@
-Here's a README file formatted for GitHub:  
 
-```markdown
+
 # Timesheet Management Application
 
 A Timesheet Management application built using React and Vite. This application allows users to log their working hours, manage timesheets, and track the status of their submissions. It includes both user and admin functionalities.  
@@ -49,7 +48,7 @@ lokeshvivek2511-timesheet-client-react/
     ├── img/
     ├── api.js
     └── App.css
-```
+
 
 ---
 
